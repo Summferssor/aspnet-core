@@ -3,6 +3,8 @@ using Abp.Zero.EntityFrameworkCore;
 using ABPMPA.Demo.Authorization.Roles;
 using ABPMPA.Demo.Authorization.Users;
 using ABPMPA.Demo.MultiTenancy;
+using ABPMPA.Demo.PhoneBooks.Persons;
+using ABPMPA.Demo.PhoneBooks.PhoneNumbers;
 
 namespace ABPMPA.Demo.EntityFrameworkCore
 {
@@ -10,9 +12,22 @@ namespace ABPMPA.Demo.EntityFrameworkCore
     {
         /* Define a DbSet for each entity of the application */
         
+            
+
         public DemoDbContext(DbContextOptions<DemoDbContext> options)
             : base(options)
         {
+        }
+
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Phone> Phones { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Person>().ToTable("Person", "PB");
+            modelBuilder.Entity<Phone>().ToTable("Phone", "PB");
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
