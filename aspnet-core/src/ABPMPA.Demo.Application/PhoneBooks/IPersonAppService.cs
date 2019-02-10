@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using ABPMPA.Demo.Application.PhoneBooks.Dto;
 using ABPMPA.Demo.PhoneBooks.Dto;
 using System;
 using System.Collections.Generic;
@@ -35,5 +36,7 @@ namespace ABPMPA.Demo.PhoneBooks
         /// </summary>
         /// <returns></returns>
         Task DeletePersonAsync(EntityDto input);
+
+        Task<GetPersonForEditOutput> GetPersonForEditAsync(NullableIdDto input);
     }
 }

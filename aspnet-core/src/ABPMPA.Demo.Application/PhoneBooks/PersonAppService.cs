@@ -8,6 +8,7 @@ using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
+using ABPMPA.Demo.Application.PhoneBooks.Dto;
 using ABPMPA.Demo.PhoneBooks.Dto;
 using ABPMPA.Demo.PhoneBooks.Persons;
 using Microsoft.EntityFrameworkCore;
@@ -58,7 +59,7 @@ namespace ABPMPA.Demo.PhoneBooks
         {
             var dbitem = await _personRepository.GetAsync(input.Id.Value);
             return dbitem.MapTo<PersonListDto>();
-           
+
         }
 
         protected async Task UpdatePersonAsync(PersonEditDto input)
@@ -69,6 +70,23 @@ namespace ABPMPA.Demo.PhoneBooks
         protected async Task CreatePersonAsync(PersonEditDto input)
         {
             await _personRepository.InsertAsync(input.MapTo<Person>());
+        }
+
+        public async Task<GetPersonForEditOutput> GetPersonForEditAsync(NullableIdDto input)
+        {
+            var output = new GetPersonForEditOutput();
+            PersonEditDto personEditDto;
+            if (input.Id.HasValue)
+            {
+                var entity = await _personRepository.GetAsync(input.Id.Value);
+                personEditDto = entity.MapTo<PersonEditDto>();
+            }
+            else
+            {
+                personEditDto = new PersonEditDto();
+            }
+            output.Person = personEditDto;
+            return output;
         }
     }
 }
