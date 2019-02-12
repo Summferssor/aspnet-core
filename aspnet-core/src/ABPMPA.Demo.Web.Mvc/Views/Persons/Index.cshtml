@@ -58,8 +58,23 @@
                                     <ul class="dropdown-menu pull-right">
                                         <li><a href="#" class="waves-effect waves-block edit-person" data-person-id="@person.Id" data-toggle="modal" data-target="#PersonCreateModal"><i class="material-icons">edit</i>@L("Edit")</a></li>
                                         <li><a href="#" class="waves-effect waves-block delete-person" data-person-id="@person.Id" data-person-name="@person.Name"><i class="material-icons">delete_sweep</i>@L("Delete")</a></li>
+                                        <li><a href="#" class="waves-effect waves-block add-number" data-person-id="@person.Id" data-person-name="@person.Name"><i class="material-icons">add</i>@L("AddNumber")</a></li>
                                     </ul>
                                 </td>
+                                @if(person.Phones.Count > 0)
+                                {
+                                    <tr>
+                                        <th>电话类型</th>
+                                        <th>电话号码</th>
+                                    </tr>
+                                    foreach (var item in person.Phones)
+                                    {
+                                        <tr>
+                                            <td>@item.Type</td>
+                                            <td>@item.Number</td>
+                                        </tr>
+                                    }
+                                }                                
                             </tr>
                         }
                     </tbody>

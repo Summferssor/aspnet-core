@@ -48,7 +48,7 @@ namespace ABPMPA.Demo.PhoneBooks
 
         public async Task<PagedResultDto<PersonListDto>> GetPagedPersonAsync(GetPersonInput input)
         {
-            var query = _personRepository.GetAll();
+            var query = _personRepository.GetAllIncluding(a => a.phones);
             var personCount = await query.CountAsync();
             var persons = await query.OrderBy(input.Sorting).PageBy(input).ToListAsync();
             var dtos = persons.MapTo<List<PersonListDto>>();
@@ -57,7 +57,7 @@ namespace ABPMPA.Demo.PhoneBooks
 
         public async Task<PersonListDto> GetPersonByIdAsync(NullableIdDto input)
         {
-            var dbitem = await _personRepository.GetAsync(input.Id.Value);
+            var dbitem = await _personRepository.GetAllIncluding(a => a.phones).FirstOrDefaultAsync(a=>a.Id == input.Id.Value);
             return dbitem.MapTo<PersonListDto>();
 
         }
@@ -69,7 +69,8 @@ namespace ABPMPA.Demo.PhoneBooks
         }
         protected async Task CreatePersonAsync(PersonEditDto input)
         {
-            await _personRepository.InsertAsync(input.MapTo<Person>());
+            var entity = input.MapTo<Person>();
+            await _personRepository.InsertAsync(entity);
         }
 
         public async Task<GetPersonForEditOutput> GetPersonForEditAsync(NullableIdDto input)
@@ -78,7 +79,7 @@ namespace ABPMPA.Demo.PhoneBooks
             PersonEditDto personEditDto;
             if (input.Id.HasValue)
             {
-                var entity = await _personRepository.GetAsync(input.Id.Value);
+                var entity = await _personRepository.GetAllIncluding(a => a.phones).FirstOrDefaultAsync(a=>a.Id == input.Id.Value);
                 personEditDto = entity.MapTo<PersonEditDto>();
             }
             else

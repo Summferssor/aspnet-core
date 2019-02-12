@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using ABPMPA.Demo.Application.PhoneBooks.Phone.Dto;
 using ABPMPA.Demo.PhoneBooks.Persons;
 using System;
 using System.Collections.Generic;
@@ -22,5 +23,7 @@ namespace ABPMPA.Demo.PhoneBooks.Dto
         /// 地址
         /// </summary>
         public string Address { get; set; }
+
+        public List<PhoneListDto> Phones { get; set; }
     }
 }

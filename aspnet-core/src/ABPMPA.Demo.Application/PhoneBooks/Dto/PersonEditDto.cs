@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using ABPMPA.Demo.Application.PhoneBooks.Phone.Dto;
 using ABPMPA.Demo.PhoneBooks.Persons;
 using System;
 using System.Collections.Generic;
@@ -16,18 +17,21 @@ namespace ABPMPA.Demo.PhoneBooks.Dto
         /// 姓名
         /// </summary>
         [Required]
-        [MaxLength(50)]
+        [MaxLength(DemoConsts.MaxNameLength)]
         public string Name { get; set; }
         /// <summary>
         /// 邮箱
         /// </summary>
         [EmailAddress]
-        [MaxLength(100)]
+        [MaxLength(DemoConsts.MaxEmailLength)]
         public string Email { get; set; }
         /// <summary>
         /// 地址
         /// </summary>
-        [MaxLength(200)]
+        [MaxLength(DemoConsts.MaxAddressLength)]
         public string Address { get; set; }
+
+
+        public List<PhoneEditDto> phones { get; set; }
     }
 }

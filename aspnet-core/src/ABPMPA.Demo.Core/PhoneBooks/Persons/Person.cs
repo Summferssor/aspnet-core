@@ -1,4 +1,5 @@
 ﻿using Abp.Domain.Entities.Auditing;
+using ABPMPA.Demo.PhoneBooks.PhoneNumbers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,6 +30,8 @@ namespace ABPMPA.Demo.PhoneBooks.Persons
         [MaxLength(DemoConsts.MaxAddressLength)]
         public string Address { get; set; }
 
+
+        public ICollection<Phones> phones { get; set; }
 
     }
 }

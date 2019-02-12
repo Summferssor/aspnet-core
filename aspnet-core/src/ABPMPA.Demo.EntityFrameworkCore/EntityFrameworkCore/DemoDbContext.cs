@@ -20,13 +20,13 @@ namespace ABPMPA.Demo.EntityFrameworkCore
         }
 
         public DbSet<Person> Persons { get; set; }
-        public DbSet<Phone> Phones { get; set; }
+        public DbSet<Phones> Phones { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Person>().ToTable("Person", "PB");
-            modelBuilder.Entity<Phone>().ToTable("Phone", "PB");
+            modelBuilder.Entity<Phones>().ToTable("Phone", "PB");
             base.OnModelCreating(modelBuilder);
         }
     }

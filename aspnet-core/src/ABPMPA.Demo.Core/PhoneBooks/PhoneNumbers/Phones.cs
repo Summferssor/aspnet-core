@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ABPMPA.Demo.PhoneBooks.PhoneNumbers
 {
-    public class Phone :Entity<long>, IHasCreationTime
+    public class Phones :Entity<long>, IHasCreationTime
     {
         /// <summary>
         /// 电话
